@@ -5,6 +5,14 @@ spring:
     oauth2:
       client:
         registration:
+          cello-client-oidc:
+              provider: cello-auth
+              client-id: cello
+              client-secret: secret
+              authorization-grant-type: authorization_code
+              redirect-uri: "http://127.0.0.1:8080/login/oauth2/code/{registrationId}"
+              scope: openid
+              client-name: cello-client-oidc
           cello-authorization-code:
             provider: cello-auth
             client-id: cello
@@ -12,7 +20,7 @@ spring:
             authorization-grant-type: authorization_code
             redirect-uri: "http://localhost:8080/authorized"
             scope: cello.read, cello.write
-            client-name: cello-modules
+            client-name: cello-authorization-code
         provider:
           cello-auth:
-            issuer-uri: http://localhost:8090
+            issuer-uri: http://auth-server:8090

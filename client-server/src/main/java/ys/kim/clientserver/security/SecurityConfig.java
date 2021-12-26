@@ -17,7 +17,7 @@ public class SecurityConfig {
           authorizeRequests.anyRequest().authenticated();
         })
         .oauth2Login(oauth2Login -> {
-          oauth2Login.loginPage("/oauth2/authorization/cello-authorization-code");
+          oauth2Login.loginPage("/oauth2/authorization/cello-client-oidc");
         })
         .oauth2Client(withDefaults());
     return http.build();

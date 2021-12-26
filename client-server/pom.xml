@@ -18,11 +18,13 @@
     <java.version>11</java.version>
   </properties>
   <dependencies>
+    <!-- Spring -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
       <version>2.5.4</version>
     </dependency>
+    <!-- Security -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-security</artifactId>
@@ -43,6 +45,7 @@
       <artifactId>reactor-netty</artifactId>
       <version>1.0.9</version>
     </dependency>
+    <!-- Test -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
