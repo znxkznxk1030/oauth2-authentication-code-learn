@@ -15,7 +15,8 @@ public class ResourceServerConfig {
       .mvcMatchers("/cello/**")
       .access("hasAuthority('SCOPE_cello.read')")
       .and()
-      .oauth2ResourceServer();
+      .oauth2ResourceServer()
+      .jwt();
       
     return http.build();
   }
