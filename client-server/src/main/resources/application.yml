@@ -1,1 +1,18 @@
 server.port: 8080
+
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          cello-authorization-code:
+            provider: cello-auth
+            client-id: cello
+            client-secret: secret
+            authorization-grant-type: authorization_code
+            redirect-uri: "http://localhost:8080/authorized"
+            scope: cello.read, cello.write
+            client-name: cello-modules
+        provider:
+          cello-auth:
+            issuer-uri: http://localhost:8090

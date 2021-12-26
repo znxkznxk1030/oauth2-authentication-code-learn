@@ -24,7 +24,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         .withClient("cello")
         .secret("{noop}secret")
         .authorizedGrantTypes("authorization_code", "refresh_token")
-        .scopes("web")
+        .scopes("cello.read", "cello.write")
         .redirectUris("http://localhost:8080/authorized");
   }
 

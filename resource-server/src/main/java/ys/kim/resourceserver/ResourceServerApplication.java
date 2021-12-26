@@ -1,14 +1,13 @@
-package ys.kim.clientserver;
+package ys.kim.resourceserver;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ClientServerApplication {
+public class ResourceServerApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ClientServerApplication.class, args);
+		SpringApplication.run(ResourceServerApplication.class, args);
 	}
 
 }
-
