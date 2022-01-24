@@ -6,3 +6,14 @@ spring:
       resourceserver:
         jwt:
           issuer-uri: http://auth-server:8090
+
+---
+spring.config.activate.on-profile: docker
+
+app:
+   auth-server:
+      host: auth-server
+      port: 8090
+   client-server:
+      host: client-server
+      port: 8080

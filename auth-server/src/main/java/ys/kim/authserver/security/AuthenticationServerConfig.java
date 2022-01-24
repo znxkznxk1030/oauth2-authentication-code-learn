@@ -26,6 +26,7 @@ import org.springframework.security.oauth2.server.authorization.client.InMemoryR
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository;
 import org.springframework.security.oauth2.server.authorization.config.ProviderSettings;
+import org.springframework.security.oauth2.server.authorization.config.TokenSettings;
 
 @Configuration(proxyBeanMethods = false)
 public class AuthenticationServerConfig {
@@ -53,6 +54,8 @@ public class AuthenticationServerConfig {
 
     return new InMemoryRegisteredClientRepository(registeredClient);
   }
+
+  // TokenSettings
 
   @Bean
   public JWKSource<SecurityContext> jwkSource() {

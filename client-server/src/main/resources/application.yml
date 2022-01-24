@@ -24,3 +24,14 @@ spring:
         provider:
           cello-auth:
             issuer-uri: http://auth-server:8090
+
+---
+spring.config.activate.on-profile: docker
+
+app:
+   auth-server:
+      host: auth-server
+      port: 8090
+   resource-server:
+      host: resource-server
+      port: 8081

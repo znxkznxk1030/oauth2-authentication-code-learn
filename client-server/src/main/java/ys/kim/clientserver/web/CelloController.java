@@ -9,8 +9,13 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 import static org.springframework.security.oauth2.client.web.reactive.function.client.ServerOAuth2AuthorizedClientExchangeFilterFunction.oauth2AuthorizedClient;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @RestController
 public class CelloController {
+
+  Logger log = LoggerFactory.getLogger(CelloController.class);
 
   @Autowired
   private WebClient webClient;
@@ -18,6 +23,8 @@ public class CelloController {
   @GetMapping(value = "/cello")
   public String[] getCelloDatas(
       @RegisteredOAuth2AuthorizedClient("cello-authorization-code") OAuth2AuthorizedClient authorizedClient) {
+
+        log.info("access token: {}", authorizedClient.getAccessToken().toString());
     return this.webClient.get()
         .uri("http://localhost:8081/cello")
         .attributes(oauth2AuthorizedClient(authorizedClient))

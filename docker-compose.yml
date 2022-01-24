@@ -1,0 +1,27 @@
+version: '2.1'
+
+services:
+  auth-server:
+    build: auth-server
+    mem_limit: 350m
+    ports:
+      - "8090:8090"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+  
+  client-server:
+    build: client-server
+    mem_limit: 350m
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+
+  resource-server:
+    build: resource-server
+    mem_limit: 350m
+    ports:
+      - "8081:8081"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+
