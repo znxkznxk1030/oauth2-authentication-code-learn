@@ -14,6 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.server.authorization.config.TokenSettings;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
+import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 import org.springframework.security.config.Customizer;
@@ -23,30 +24,43 @@ import org.springframework.context.annotation.Bean;
 import javax.sql.DataSource;
 
 @EnableWebSecurity
-public class DefaultSecurityConfig{
+public class DefaultSecurityConfig {
 
-  @Autowired
-  DataSource dataSource;
+    @Autowired
+    DataSource dataSource;
 
-  @Bean
-  SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
-    http.authorizeRequests(authorizeRequests -> authorizeRequests.anyRequest().authenticated())
-        .formLogin(ctx -> {
-          System.out.println(ctx.getClass());
-        });
+    @Bean
+    SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
+        http.authorizeRequests(authorizeRequests -> authorizeRequests
+//                .antMatchers("/user/**").hasRole("MANAGER")
+                .anyRequest().authenticated()
+        )
+                .formLogin(ctx -> {
+                    System.out.println(ctx.getClass());
+                });
 
-    return http.build();
-  }
+        return http.build();
+    }
 
-  @Bean
-  public PasswordEncoder passwordEncoder()
-  {
-    return new BCryptPasswordEncoder(10);
-  }
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder(10);
+    }
 
-  @Bean
-  UserDetailsService users() {
-    return new JdbcUserDetailsManagerConfigurer<>().dataSource(dataSource).withDefaultSchema().passwordEncoder(passwordEncoder()).getUserDetailsService();
-  }
+//    @Bean
+//    public JdbcUserDetailsManager userDetailsManager(DataSource dataSource) {
+//        JdbcUserDetailsManager mgr = new JdbcUserDetailsManager();
+//        mgr.setDataSource(dataSource);
+//        return mgr;
+//    }
+
+    @Bean
+    JdbcUserDetailsManager users() {
+        return new JdbcUserDetailsManagerConfigurer<>()
+                .dataSource(dataSource)
+                .withDefaultSchema()  // org/springframework/security/core/userdetails/jdbc/users.ddl
+                .passwordEncoder(passwordEncoder()) // BCryptPasswordEncoder
+                .getUserDetailsService();
+    }
 
 }
