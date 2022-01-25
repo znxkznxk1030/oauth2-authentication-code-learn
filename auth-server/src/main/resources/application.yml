@@ -1,6 +1,16 @@
 server:
   port: 8090
 
+# datasource
+spring:
+  datasource:
+    hikari:
+      maximum-pool-size: 4
+    url: jdbc:postgresql://localhost:5432/dbcom
+    username: arthur
+    password: 1q2w3e4r
+    driver-class-name: org.postgresql.Driver
+
 ---
 spring.config.activate.on-profile: docker
 

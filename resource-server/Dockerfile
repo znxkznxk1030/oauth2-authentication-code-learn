@@ -1,5 +1,4 @@
-FROM openjdk:12.0.2
-
+FROM openjdk:11
 EXPOSE 8081
 
 ADD ./target/*.jar app.jar
