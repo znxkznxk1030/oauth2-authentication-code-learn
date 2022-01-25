@@ -6,7 +6,7 @@ spring:
   datasource:
     hikari:
       maximum-pool-size: 4
-    url: jdbc:postgresql://localhost:5432/dbcom
+    url: jdbc:postgresql://localhost:5432/postgres
     username: arthur
     password: 1q2w3e4r
     driver-class-name: org.postgresql.Driver

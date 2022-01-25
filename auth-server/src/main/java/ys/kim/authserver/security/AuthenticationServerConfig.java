@@ -45,7 +45,7 @@ public class AuthenticationServerConfig {
   public RegisteredClientRepository registeredClientRepository() {
     RegisteredClient registeredClient = RegisteredClient.withId(UUID.randomUUID().toString())
         .clientId("cello-client")
-        .clientSecret("{noop}secret")
+        .clientSecret("$2a$10$orBaVqXjmPJtd99Cj.m.Xedcv.KD2W/HIIJbCrSVjdCI.WTB3QNYG") // "secret"
         .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
         .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
         .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
@@ -57,6 +57,8 @@ public class AuthenticationServerConfig {
 
     return new InMemoryRegisteredClientRepository(registeredClient);
   }
+
+
 
   // TokenSettings
 
