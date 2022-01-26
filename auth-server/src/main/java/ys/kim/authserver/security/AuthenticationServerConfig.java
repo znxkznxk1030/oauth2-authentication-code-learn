@@ -57,9 +57,6 @@ public class AuthenticationServerConfig {
 
     return new InMemoryRegisteredClientRepository(registeredClient);
   }
-
-
-
   // TokenSettings
 
   @Bean
