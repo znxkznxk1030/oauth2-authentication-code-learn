@@ -1,0 +1,37 @@
+server.port: 9080
+
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          cello-client-oidc:
+            provider: cello-auth
+            client-id: cello-client
+            client-secret: secret
+            authorization-grant-type: authorization_code
+            redirect-uri: "http://127.0.0.1:8080/login/oauth2/code/{registrationId}"
+            scope: openid
+            client-name: cello-client-oidc
+          cello-authorization-code:
+            provider: cello-auth
+            client-id: cello-client
+            client-secret: secret
+            authorization-grant-type: authorization_code
+            redirect-uri: "http://127.0.0.1:8080/authorized"
+            scope: cello.read
+            client-name: cello-authorization-code
+        provider:
+          cello-auth:
+            issuer-uri: http://auth-server:8090
+
+---
+spring.config.activate.on-profile: docker
+
+app:
+  auth-server:
+    host: auth-server
+    port: 8090
+  resource-server:
+    host: resource-server
+    port: 8081

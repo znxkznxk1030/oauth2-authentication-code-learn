@@ -24,7 +24,8 @@ public class CelloController {
   public String[] getCelloDatas(
       @RegisteredOAuth2AuthorizedClient("cello-authorization-code") OAuth2AuthorizedClient authorizedClient) {
 
-        log.info("access token: {}", authorizedClient.getAccessToken().toString());
+        log.info("access scope: {}", authorizedClient.getAccessToken().getScopes());
+        log.info("access value: {}", authorizedClient.getAccessToken().getTokenValue());
     return this.webClient.get()
         .uri("http://localhost:8081/cello")
         .attributes(oauth2AuthorizedClient(authorizedClient))
