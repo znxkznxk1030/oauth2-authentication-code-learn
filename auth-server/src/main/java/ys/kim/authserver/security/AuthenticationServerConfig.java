@@ -55,7 +55,19 @@ public class AuthenticationServerConfig {
         .scope("cello.read")
         .build();
 
-    return new InMemoryRegisteredClientRepository(registeredClient);
+    RegisteredClient registeredClient2 = RegisteredClient.withId(UUID.randomUUID().toString())
+            .clientId("cello-client-2")
+            .clientSecret("$2a$10$UUyhYQ.MO5jL9SJVqBZKjugXANYQjm1dSY9vSW.rh92mq9G2saGEe") // "secret-2"
+            .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
+            .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
+            .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
+            .redirectUri("http://127.0.0.1:9080/login/oauth2/code/cello-client-oidc")
+            .redirectUri("http://127.0.0.1:9080/authorized")
+            .scope(OidcScopes.OPENID)
+            .scope("cello.read")
+            .build();
+
+    return new InMemoryRegisteredClientRepository(registeredClient, registeredClient2);
   }
   // TokenSettings
 
