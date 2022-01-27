@@ -13,7 +13,7 @@ public class AuthServerApplication {
 
 	public static void main(String[] args) {
 		applicationContext = SpringApplication.run(AuthServerApplication.class, args);
-		displayAllBeans();
+//		displayAllBeans();
 	}
 
 	public static void displayAllBeans() {

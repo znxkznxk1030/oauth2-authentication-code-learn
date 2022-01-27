@@ -33,11 +33,14 @@ public class DefaultSecurityConfig {
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeRequests(authorizeRequests -> authorizeRequests
 //                .antMatchers("/user/**").hasRole("MANAGER")
-                .anyRequest().authenticated()
+                        .antMatchers("/resources/**").permitAll()
+                        .anyRequest().authenticated()
         )
-                .formLogin(ctx -> {
-                    System.out.println(ctx.getClass());
-                });
+                .formLogin()
+                    .loginPage("/login")
+                    .permitAll()
+                .and()
+                .csrf().disable();
 
         return http.build();
     }
