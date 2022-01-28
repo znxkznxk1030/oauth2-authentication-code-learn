@@ -38,9 +38,7 @@ public class DefaultSecurityConfig {
         )
                 .formLogin()
                     .loginPage("/login")
-                    .permitAll()
-                .and()
-                .csrf().disable();
+                    .permitAll();
 
         return http.build();
     }
@@ -50,17 +48,10 @@ public class DefaultSecurityConfig {
         return new BCryptPasswordEncoder(10);
     }
 
-//    @Bean
-//    public JdbcUserDetailsManager userDetailsManager(DataSource dataSource) {
-//        JdbcUserDetailsManager mgr = new JdbcUserDetailsManager();
-//        mgr.setDataSource(dataSource);
-//        return mgr;
-//    }
-
     @Bean
     JdbcUserDetailsManager users() {
         return new JdbcUserDetailsManagerConfigurer<>()
-                .dataSource(dataSource)
+                .dataSource(dataSource) // jdbc:postgresql://localhost:5432/postgres
                 .withDefaultSchema()  // org/springframework/security/core/userdetails/jdbc/users.ddl
                 .passwordEncoder(passwordEncoder()) // BCryptPasswordEncoder
                 .getUserDetailsService();

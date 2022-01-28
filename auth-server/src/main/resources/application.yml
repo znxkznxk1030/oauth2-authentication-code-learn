@@ -11,6 +11,10 @@ spring:
     password: 1q2w3e4r
     driver-class-name: org.postgresql.Driver
 
+# jsp
+spring.mvc.view.prefix: /WEB-INF/jsp/
+spring.mvc.view.suffix: .jsp
+
 ---
 spring.config.activate.on-profile: docker
 

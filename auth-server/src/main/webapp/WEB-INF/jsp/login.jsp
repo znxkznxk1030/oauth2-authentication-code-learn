@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
@@ -30,8 +32,8 @@
                 <input class="bg-green-500 text-white text-lg font-medium p-2 rounded inline-block w-full hover:bg-green-400 transition duration-400 hover:shadow-lg"
                        type="submit" value="Login">
             </div>
-<!--            <input type="hidden"-->
-<!--                   name="${_csrf.parameterName}" value="${_csrf.token}" />-->
+            <input type="hidden"
+                   name="${_csrf.parameterName}" value="${_csrf.token}" />
         </form>
         <div class="text-center pb-4">
             <p class="text-grey-dark text-sm">
