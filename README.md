@@ -8,10 +8,10 @@
 
 ## 동작 화면
 
-1. 클라이언트 서버 접근 ( localhost:8080 ) | login-process.pcapng
-2. 세션이 없으므로 인증서버 ( auth-server:8090/login )의 로그인 화면으로 리다이렉션 | to-authserver-with-authentication-code.pcapng
+1. 클라이언트 서버 접근 ( localhost:8080 ) 
+2. 세션이 없으므로 인증서버 ( auth-server:8090/login )의 로그인 화면으로 리다이렉션 
    - Authentication Code와 함께 리다이렉션 시킨다.
-3. 로그인 성공 후, 엑세스 토큰과 함께 클라이언트 서버로 리다이렉션 | sucess-login-8080.pcapng
+3. 로그인 성공 후, 엑세스 토큰과 함께 클라이언트 서버로 리다이렉션
 
 ![oauth2 flow](./images/oauth2-flow.gif)
 
