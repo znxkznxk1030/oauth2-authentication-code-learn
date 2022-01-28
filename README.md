@@ -24,9 +24,11 @@
 - Auth0 Tenant: 인증서버 ( Auth Server )
 - Your API: 자원 서버 ( Resource Server )
 
+
+<!-- 
 ### 패킷
 
-- 각 단계별 패킷을 "/wire-shark" 폴더에다 저장해두었다.
+- 각 단계별 패킷을 "/wire-shark" 폴더에다 저장해두었다. -->
 
 ![login redirect](./images/login-redirect.png)
 
@@ -259,7 +261,7 @@ http.authorizeRequests(authorizeRequests -> authorizeRequests
 
 ![sso flow](./images/sso-flow.png)
 
-- client1에서 로그인하면 client2에 접근하면 별고의 로그인 절차 없이 로그인된다.
+- client1에서 로그인하면 client2에 접근하면 별도의 로그인 절차 없이 로그인된다.
 - 인증서버 ( auth-server )가 직접 브라우저 쿠키에 세션 키값을 저장하고, 이용해 세션을 생성한다.
 
 ![sso flow](./images/sso-flow-capture.gif)
