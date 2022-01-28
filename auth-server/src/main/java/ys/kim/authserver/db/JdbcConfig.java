@@ -9,8 +9,11 @@ import javax.sql.DataSource;
 
 @Configuration
 public class JdbcConfig {
-    @Autowired
-    JdbcProperties jdbcProperties;
+    final JdbcProperties jdbcProperties;
+
+    public JdbcConfig(JdbcProperties jdbcProperties) {
+        this.jdbcProperties = jdbcProperties;
+    }
 
     @Bean
     public DataSource getDataSource() {

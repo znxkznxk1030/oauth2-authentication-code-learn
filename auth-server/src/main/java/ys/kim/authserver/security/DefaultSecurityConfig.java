@@ -32,8 +32,6 @@ public class DefaultSecurityConfig {
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeRequests(authorizeRequests -> authorizeRequests
-//                .antMatchers("/user/**").hasRole("MANAGER")
-                        .antMatchers("/resources/**").permitAll()
                         .anyRequest().authenticated()
         )
                 .formLogin()
