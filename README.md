@@ -1,22 +1,30 @@
 # oauth2-authentication-code-learn
 
+## 서버 구성
+
+- 인증서버 (IDP | IDentity Provider) : auth-server ( localhost:8090, auth-server:8090 )
+- 클라이언트 서버 ( Client Server ) : client-server ( localhost: 8080 ), client-server-2 ( localhost: 9080 )
+- 자원 서버 ( Resource Server ) : resource-server ( localhost: 8081 )
+
+## 동작 화면
+
+1. 클라이언트 서버 접근 ( localhost:8080 )
+2. 세션이 없으므로 인증서버 ( auth-server:8090/login )의 로그인 화면으로 리다이렉션
+3. 로그인 성공 후, 엑세스 토큰과 함께 클라이언트 서버로 리다이렉션
+
+![oauth2 flow](./images/oauth2-flow.gif)
+
+
+### 흐름도
+
+![authentication code flow](./images/auth-sequence-auth-code-pkce.png)
+
+- User: 사용자
+- App: 클라이언트 서버 ( Client Server )
+- Auth0 Tenant: 인증서버 ( Auth Server )
+- Your API: 자원 서버 ( Resource Server )
+
 ## UserDetails와 DB ( Postgresql ) 연결
-
-### AS-IS ( InMemoryUserDetailManager )
-
-```java
-// @formatter:off
- @Bean
- UserDetailsService users() {
-  UserDetails user = User.withDefaultPasswordEncoder()
-    .username("user1")
-    .password("password")
-    .roles("USER")
-    .build();
-  return new InMemoryUserDetailsManager(user);
- }
- // @formatter:on
-```
 
 ### Docker 환경에서 Postgresql 실행
 
@@ -135,7 +143,6 @@ public PasswordEncoder passwordEncoder() {
 
 - PasswordEncoder 빈을 생성하게 될 경우, 이 빈으로 user의 password뿐만 아니라, client의 secret 값도 인코딩 하게 됩니다.
 
-
 #### UserDetailService를 JdbcUserDetailsManager로 교체
 
 - JdbcUserDetailManager는 UserDetailsManager를 상속 받았다.
@@ -242,11 +249,18 @@ http.authorizeRequests(authorizeRequests -> authorizeRequests
 
 ## SSO ( Single Sign-On ) 인증 확인하기
 
+### Single Sign-On 흐름도
 
+![sso flow](./images/sso-flow.png)
+
+- client1에서 로그인하면 client2에 접근하면 별고의 로그인 절차 없이 로그인된다.
+- 인증서버 ( auth-server )가 직접 브라우저 쿠키에 세션 키값을 저장하고, 이용해 세션을 생성한다.
 
 ## References
 
+- <https://auth0.com/docs/get-started/authentication-and-authorization-flow/authorization-code-flow-with-proof-key-for-code-exchange-pkce>
 - <https://springhow.com/custom-form-login-in-spring-security/>
 - <https://docs.spring.io/spring-security/site/docs/5.4.2/reference/html5/>
 - <https://www.javainterviewpoint.com/spring-security-jdbcuserdetailsmanager-example/>
 - <https://velog.io/@jwpark06/SpringBoot%EC%97%90-JDBC%EB%A1%9C-Postgresql-%EC%97%B0%EB%8F%99%ED%95%98%EA%B8%B0>
+- <https://auth0.com/blog/what-is-and-how-does-single-sign-on-work/>
