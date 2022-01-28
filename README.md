@@ -8,12 +8,12 @@
 
 ## 동작 화면
 
-1. 클라이언트 서버 접근 ( localhost:8080 )
-2. 세션이 없으므로 인증서버 ( auth-server:8090/login )의 로그인 화면으로 리다이렉션
-3. 로그인 성공 후, 엑세스 토큰과 함께 클라이언트 서버로 리다이렉션
+1. 클라이언트 서버 접근 ( localhost:8080 ) | login-process.pcapng
+2. 세션이 없으므로 인증서버 ( auth-server:8090/login )의 로그인 화면으로 리다이렉션 | to-authserver-with-authentication-code.pcapng
+   - Authentication Code와 함께 리다이렉션 시킨다.
+3. 로그인 성공 후, 엑세스 토큰과 함께 클라이언트 서버로 리다이렉션 | sucess-login-8080.pcapng
 
 ![oauth2 flow](./images/oauth2-flow.gif)
-
 
 ### 흐름도
 
@@ -23,6 +23,12 @@
 - App: 클라이언트 서버 ( Client Server )
 - Auth0 Tenant: 인증서버 ( Auth Server )
 - Your API: 자원 서버 ( Resource Server )
+
+### 패킷
+
+- 각 단계별 패킷을 "/wire-shark" 폴더에다 저장해두었다.
+
+![login redirect](./images/login-redirect.png)
 
 ## UserDetails와 DB ( Postgresql ) 연결
 
@@ -255,6 +261,11 @@ http.authorizeRequests(authorizeRequests -> authorizeRequests
 
 - client1에서 로그인하면 client2에 접근하면 별고의 로그인 절차 없이 로그인된다.
 - 인증서버 ( auth-server )가 직접 브라우저 쿠키에 세션 키값을 저장하고, 이용해 세션을 생성한다.
+
+![sso flow](./images/sso-flow-capture.gif)
+
+- Client Server 2에서 로그인.
+- Client Server 1에 접근 => 별도의 로그인 절차 없이 로그인 되어있다.
 
 ## References
 
