@@ -6,6 +6,7 @@ import org.springframework.security.config.annotation.authentication.configurers
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -26,33 +27,40 @@ import javax.sql.DataSource;
 @EnableWebSecurity
 public class DefaultSecurityConfig {
 
-    @Autowired
-    DataSource dataSource;
+  final DataSource dataSource;
 
-    @Bean
-    SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
-        http.authorizeRequests(authorizeRequests -> authorizeRequests
-                        .anyRequest().authenticated()
-        )
-                .formLogin()
-                    .loginPage("/login")
-                    .permitAll();
+  public DefaultSecurityConfig(DataSource dataSource) {
+    this.dataSource = dataSource;
+  }
 
-        return http.build();
-    }
+  @Bean
+  SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
+    http.authorizeRequests(
+            authorizeRequests -> {
+              authorizeRequests.anyRequest().authenticated();
+            })
+        .csrf(AbstractHttpConfigurer::disable)
+        .cors(AbstractHttpConfigurer::disable)
+        .formLogin(
+            login -> {
+              login.loginPage("http://localhost:3000");
+              login.loginProcessingUrl("/login-process");
+            });
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder(10);
-    }
+    return http.build();
+  }
 
-    @Bean
-    JdbcUserDetailsManager users() {
-        return new JdbcUserDetailsManagerConfigurer<>()
-                .dataSource(dataSource) // jdbc:postgresql://localhost:5432/postgres
-                .withDefaultSchema()  // org/springframework/security/core/userdetails/jdbc/users.ddl
-                .passwordEncoder(passwordEncoder()) // BCryptPasswordEncoder
-                .getUserDetailsService();
-    }
+  @Bean
+  public PasswordEncoder passwordEncoder() {
+    return new BCryptPasswordEncoder(10);
+  }
 
+  @Bean
+  JdbcUserDetailsManager users() {
+    return new JdbcUserDetailsManagerConfigurer<>()
+        .dataSource(dataSource) // jdbc:postgresql://localhost:5432/postgres
+        .withDefaultSchema() // org/springframework/security/core/userdetails/jdbc/users.ddl
+        .passwordEncoder(passwordEncoder()) // BCryptPasswordEncoder
+        .getUserDetailsService();
+  }
 }
