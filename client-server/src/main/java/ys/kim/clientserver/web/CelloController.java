@@ -15,23 +15,23 @@ import org.slf4j.LoggerFactory;
 @RestController
 public class CelloController {
 
-  Logger log = LoggerFactory.getLogger(CelloController.class);
+    Logger log = LoggerFactory.getLogger(CelloController.class);
 
-  @Autowired
-  private WebClient webClient;
+    @Autowired
+    private WebClient webClient;
 
-  @GetMapping(value = "/cello")
-  public String[] getCelloDatas(
-      @RegisteredOAuth2AuthorizedClient("cello-authorization-code") OAuth2AuthorizedClient authorizedClient) {
+    @GetMapping(value = "/cello")
+    public String[] getCelloDatas(
+            @RegisteredOAuth2AuthorizedClient("cello-authorization-code") OAuth2AuthorizedClient authorizedClient) {
 
         log.info("access scope: {}", authorizedClient.getAccessToken().getScopes());
         log.info("access value: {}", authorizedClient.getAccessToken().getTokenValue());
-    return this.webClient.get()
-        .uri("http://localhost:8081/cello")
-        .attributes(oauth2AuthorizedClient(authorizedClient))
-        .retrieve()
-        .bodyToMono(String[].class)
-        .block();
-  }
+        return this.webClient.get()
+                .uri("http://localhost:8081/cello")
+                .attributes(oauth2AuthorizedClient(authorizedClient))
+                .retrieve()
+                .bodyToMono(String[].class)
+                .block();
+    }
 
 }

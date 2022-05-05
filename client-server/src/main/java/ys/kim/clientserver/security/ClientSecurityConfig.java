@@ -12,16 +12,16 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @EnableWebSecurity
 public class ClientSecurityConfig {
 
-  @Bean
-  SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-    http
-        .authorizeRequests(authorizeRequests -> {
-          authorizeRequests.anyRequest().authenticated();
-        })
-        .oauth2Login(oauth2Login -> {
-          oauth2Login.loginPage("/oauth2/authorization/cello-client-oidc");
-        })
-        .oauth2Client(withDefaults());
-    return http.build();
-  }
+    @Bean
+    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http
+                .authorizeRequests(authorizeRequests -> {
+                    authorizeRequests.anyRequest().authenticated();
+                })
+                .oauth2Login(oauth2Login -> {
+                    oauth2Login.loginPage("/oauth2/authorization/cello-client-oidc");
+                })
+                .oauth2Client(withDefaults());
+        return http.build();
+    }
 }
