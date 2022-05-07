@@ -1,9 +1,9 @@
 server:
   port: 8090
 
-logging:
-  level:
-    root: DEBUG
+#logging:
+#  level:
+#    root: DEBUG
 
 # datasource
 spring:

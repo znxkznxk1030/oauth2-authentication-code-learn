@@ -44,7 +44,11 @@ public class DefaultSecurityConfig {
 
   @Bean
   SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
-    http.authorizeRequests(
+    http
+            .sessionManagement(session -> {
+//              session.
+            })
+            .authorizeRequests(
             authorizeRequests -> {
               authorizeRequests
                       .anyRequest().authenticated();
@@ -53,10 +57,10 @@ public class DefaultSecurityConfig {
         .cors(Customizer.withDefaults())
         .formLogin(
             login -> {
-//              login.loginPage("/login");
-              login.loginPage("http://localhost:3000");
-              login.loginProcessingUrl("/login-process");
-              login.defaultSuccessUrl("/");
+              login.loginPage("/login");
+//              login.loginPage("http://localhost:3000");
+//              login.loginProcessingUrl("/login-process");
+//              login.defaultSuccessUrl("/");
               login.permitAll();
             });
 

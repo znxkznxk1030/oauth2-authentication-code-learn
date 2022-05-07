@@ -1,7 +1,8 @@
 server.port: 8080
 
 logging:
-  level: debug
+  level:
+    root: DEBUG
 
 
 spring:
@@ -10,13 +11,13 @@ spring:
       client:
         registration:
           cello-client-oidc:
-              provider: cello-auth
-              client-id: cello-client
-              client-secret: secret
-              authorization-grant-type: authorization_code
-              redirect-uri: "http://127.0.0.1:8080/login/oauth2/code/{registrationId}"
-              scope: openid
-              client-name: cello-client-oidc
+            provider: cello-auth
+            client-id: cello-client
+            client-secret: secret
+            authorization-grant-type: authorization_code
+            redirect-uri: "http://127.0.0.1:8080/login/oauth2/code/{registrationId}"
+            scope: openid
+            client-name: cello-client-oidc
           cello-authorization-code:
             provider: cello-auth
             client-id: cello-client
@@ -33,9 +34,9 @@ spring:
 spring.config.activate.on-profile: docker
 
 app:
-   auth-server:
-      host: auth-server
-      port: 8090
-   resource-server:
-      host: resource-server
-      port: 8081
+  auth-server:
+    host: auth-server
+    port: 8090
+  resource-server:
+    host: resource-server
+    port: 8081
